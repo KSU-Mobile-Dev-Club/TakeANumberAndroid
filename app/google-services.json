@@ -49,37 +49,6 @@
           "status": 2
         }
       }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:947388048019:android:380238a4703bc26c",
-        "android_client_info": {
-          "package_name": "ksu.mobile.dev.club.takeanumber"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "947388048019-7b6imd0orjt6opa8bgua8irnt93dk72s.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyCGtwEU0vfWw-auUBwGJG51pk5pZqnDl6A"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
     }
   ],
   "configuration_version": "1"
