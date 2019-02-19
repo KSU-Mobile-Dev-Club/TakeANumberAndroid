@@ -1,10 +1,13 @@
 package club.dev.mobile.ksu.takeanumber;
 
+import com.google.firebase.database.Exclude;
+
 public class Student {
 
     private String name;
     private int dateTime;
     private int currentStatus; //0: waiting, 1: being helped, 2: already helped
+    private String firebaseKey;
 
     Student(){
 
@@ -35,8 +38,18 @@ public class Student {
     public int getStatus() {
         return currentStatus;
     }
+
     public void setStatus(int s) {
         currentStatus = s;
+    }
+
+    @Exclude
+    public String getFirebaseKey() {
+        return firebaseKey;
+    }
+
+    public void setFirebaseKey(String firebaseKey) {
+        this.firebaseKey = firebaseKey;
     }
 
 }

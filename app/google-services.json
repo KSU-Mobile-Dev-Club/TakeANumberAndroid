@@ -42,6 +42,13 @@
             {
               "client_id": "947388048019-7b6imd0orjt6opa8bgua8irnt93dk72s.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "947388048019-el805jgc9rbolvdip0k8nq448sbla0d3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "blair.steven.TakeANumber"
+              }
             }
           ]
         },
