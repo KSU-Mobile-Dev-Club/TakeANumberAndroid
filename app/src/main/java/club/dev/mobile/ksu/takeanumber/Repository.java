@@ -43,6 +43,20 @@ public class Repository {
         mReference.child("HelpSession2").child(key).setValue(session);
     }
 
+    public void addStudentToQueue(Student student, HelpSession session) {
+        DatabaseReference ref = mReference.child("HelpSession2").child(session.getFirebaseKey()).child("queue");
+        String key = ref.push().getKey();
+        student.setFirebaseKey(key);
+        ref.child(key).setValue(student);
+    }
+
+    public LiveData<List<Student>> getStudentQueue(HelpSession session) {
+        return Transformations.map(new StudentQueueLiveData(
+                mReference.child("HelpSession2").child(session.getFirebaseKey()).child("queue").orderByChild("dateTime")),
+                new StudentQueueDeserializer()
+        );
+    }
+
     public LiveData<List<HelpSession>> getHelpSessions() {
         return mHelpSessions;
     }
@@ -54,10 +68,24 @@ public class Repository {
             List<HelpSession> sessionList = new ArrayList<>();
             for (DataSnapshot snap : input.getChildren()) {
                 HelpSession session = snap.getValue(HelpSession.class);
+                session.setFirebaseKey(snap.getKey());
                 sessionList.add(session);
             }
             return sessionList;
         }
     }
 
+    private class StudentQueueDeserializer implements Function<DataSnapshot, List<Student>> {
+
+        @Override
+        public List<Student> apply(DataSnapshot input) {
+            List<Student> students = new ArrayList<>();
+            for (DataSnapshot snap : input.getChildren()) {
+                Student student = snap.getValue(Student.class);
+                student.setFirebaseKey(snap.getKey());
+                students.add(student);
+            }
+            return students;
+        }
+    }
 }

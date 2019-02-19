@@ -2,10 +2,12 @@ package club.dev.mobile.ksu.takeanumber;
 
 import com.google.firebase.database.Exclude;
 
+import java.time.LocalTime;
+
 public class Student {
 
     private String name;
-    private int dateTime;
+    private long dateTime;
     private int currentStatus; //0: waiting, 1: being helped, 2: already helped
     private String firebaseKey;
 
@@ -13,25 +15,23 @@ public class Student {
 
     }
 
-    Student (String n, int dt) {
+    Student (String n, long dt) {
         name = n;
         dateTime = dt;
         currentStatus = 0;
     }
 
-    private String getName() {
-        return name;
-    }
+    public String getName() {return name;}
 
     public void setName(String s){
         name = s;
     }
 
-    public int getDateTime(){
+    public long getDateTime(){
         return dateTime;
     }
 
-    public void setDateTime(int dt) {
+    public void setDateTime(long dt) {
         dateTime = dt;
     }
 

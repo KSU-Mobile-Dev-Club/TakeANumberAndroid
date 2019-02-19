@@ -11,12 +11,12 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelpSessionLiveData extends LiveData<DataSnapshot> {
-    private List<HelpSession> mSessions = new ArrayList<>();
+public class StudentQueueLiveData extends LiveData<DataSnapshot> {
+    private List<Student> mStudents = new ArrayList<>();
     private Query mQuery;
     private MyEventListener mListener = new MyEventListener();
 
-    public HelpSessionLiveData(Query q) {
+    public StudentQueueLiveData(Query q) {
         mQuery = q;
     }
 
@@ -38,9 +38,9 @@ public class HelpSessionLiveData extends LiveData<DataSnapshot> {
 
             setValue(dataSnapshot);
             for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                HelpSession session = snap.getValue(HelpSession.class);
-                session.setFirebaseKey(snap.getKey());
-                mSessions.add(session);
+                Student student = snap.getValue(Student.class);
+                student.setFirebaseKey(snap.getKey());
+                mStudents.add(student);
             }
         }
 
