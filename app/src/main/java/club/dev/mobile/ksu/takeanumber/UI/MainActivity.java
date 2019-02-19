@@ -16,24 +16,15 @@ import club.dev.mobile.ksu.takeanumber.Data.Student;
 import club.dev.mobile.ksu.takeanumber.ViewModels.HelpSessionViewModel;
 
 public class MainActivity extends AppCompatActivity {
-    private List<HelpSession> mHelpSessions;
-    private List<Student> mStudents;
-    private HelpSessionViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mViewModel = ViewModelProviders.of(this).get(HelpSessionViewModel.class);
+        //TODO: hook up with ListView & the Adapter
 
-        mViewModel.getHelpSessions().observe(this, new Observer<List<HelpSession>>() {
-            @Override
-            public void onChanged(@Nullable List<HelpSession> helpSessions) {
-                mHelpSessions = helpSessions;
-            }
-        });
-
+        //TODO: observe LiveData from the ViewModel
 
     }
 }
