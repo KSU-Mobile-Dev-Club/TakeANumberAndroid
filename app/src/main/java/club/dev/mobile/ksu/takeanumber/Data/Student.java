@@ -1,4 +1,4 @@
-package club.dev.mobile.ksu.takeanumber;
+package club.dev.mobile.ksu.takeanumber.Data;
 
 import com.google.firebase.database.Exclude;
 

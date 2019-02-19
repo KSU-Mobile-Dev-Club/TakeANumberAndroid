@@ -1,20 +1,18 @@
-package club.dev.mobile.ksu.takeanumber;
+package club.dev.mobile.ksu.takeanumber.Firebase;
 
 import android.arch.core.util.Function;
 import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.Transformations;
-import android.support.annotation.NonNull;
 
 import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
+import club.dev.mobile.ksu.takeanumber.Data.Student;
 
 public class Repository {
     private FirebaseDatabase mDatabase;

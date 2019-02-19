@@ -1,4 +1,4 @@
-package club.dev.mobile.ksu.takeanumber;
+package club.dev.mobile.ksu.takeanumber.Firebase;
 
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
@@ -11,12 +11,14 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StudentQueueLiveData extends LiveData<DataSnapshot> {
-    private List<Student> mStudents = new ArrayList<>();
+import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
+
+public class HelpSessionLiveData extends LiveData<DataSnapshot> {
+    private List<HelpSession> mSessions = new ArrayList<>();
     private Query mQuery;
     private MyEventListener mListener = new MyEventListener();
 
-    public StudentQueueLiveData(Query q) {
+    public HelpSessionLiveData(Query q) {
         mQuery = q;
     }
 
@@ -38,9 +40,9 @@ public class StudentQueueLiveData extends LiveData<DataSnapshot> {
 
             setValue(dataSnapshot);
             for (DataSnapshot snap : dataSnapshot.getChildren()) {
-                Student student = snap.getValue(Student.class);
-                student.setFirebaseKey(snap.getKey());
-                mStudents.add(student);
+                HelpSession session = snap.getValue(HelpSession.class);
+                session.setFirebaseKey(snap.getKey());
+                mSessions.add(session);
             }
         }
 
