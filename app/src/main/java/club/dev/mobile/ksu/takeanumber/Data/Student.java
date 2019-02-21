@@ -15,7 +15,7 @@ public class Student {
 
     }
 
-    Student (String n, long dt) {
+    public Student (String n, long dt) {
         name = n;
         dateTime = dt;
         currentStatus = 0;

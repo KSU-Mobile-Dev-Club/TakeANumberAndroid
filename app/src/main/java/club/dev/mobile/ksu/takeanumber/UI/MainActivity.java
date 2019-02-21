@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.Date;
 import java.util.List;
 
 import club.dev.mobile.ksu.takeanumber.Firebase.Repository;
@@ -25,6 +26,5 @@ public class MainActivity extends AppCompatActivity {
         //TODO: hook up with ListView & the Adapter
 
         //TODO: observe LiveData from the ViewModel
-
     }
 }
