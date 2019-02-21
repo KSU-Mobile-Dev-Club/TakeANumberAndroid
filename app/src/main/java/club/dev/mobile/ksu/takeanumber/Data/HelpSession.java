@@ -6,6 +6,12 @@ public class HelpSession {
     private String name;
     private String firebaseKey;
 
+    public HelpSession(String name) {
+        this.name = name;
+    }
+
+    public HelpSession() {}
+
     public String getName() {
         return name;
     }
