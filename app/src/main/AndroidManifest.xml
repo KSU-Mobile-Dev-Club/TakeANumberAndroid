@@ -16,8 +16,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.JoinSessionActivity">
-        </activity>
+        <activity android:name=".UI.JoinSessionActivity"></activity>
+        <activity
+            android:name=".UI.HelpSessionActivity"
+            android:label="@string/title_activity_help_session"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
