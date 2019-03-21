@@ -17,32 +17,31 @@ import club.dev.mobile.ksu.takeanumber.R;
 
 public class StudentAdapter extends ArrayAdapter<Student> {
     private Context mContext;
-    private List<Student> studentsList = new ArrayList<>();
+    private List<Student> studentsList;
 
     public StudentAdapter (@NonNull Context context, ArrayList<Student> list) {
-        super(context, 0, list);
+        super(context, R.layout.student_view, list);
         mContext = context;
         studentsList = list;
     }
 
     @NonNull
     @Override
-    public View getView (int position , @Nullable View converView , @NonNull ViewGroup parent) {
-        View listItem = converView;
+    public View getView (int position , @Nullable View listItem , @NonNull ViewGroup parent) {
         if(listItem == null)
             listItem = LayoutInflater.from(mContext).inflate(R.layout.student_view , parent , false);
 
         Student currentStudent = studentsList.get(position);
 
-        TextView name = (TextView) listItem.findViewById(R.id.Name);
+        TextView name = (TextView) listItem.findViewById(R.id.student_name);
         name.setText(currentStudent.getName());
 
-        TextView dateTime = (TextView) listItem.findViewById(R.id.dateTime);
+        TextView dateTime = (TextView) listItem.findViewById(R.id.student_datetime);
         String tempTime = Long.toString(currentStudent.getDateTime());
-        name.setText(tempTime);
+        dateTime.setText(tempTime);
 
-        TextView status = (TextView) listItem.findViewById(R.id.currentStatus);
-        name.setText(currentStudent.getStatus());
+        TextView status = (TextView) listItem.findViewById(R.id.student_status);
+        status.setText(Integer.toString(currentStudent.getStatus()));
 
         return listItem;
     }
