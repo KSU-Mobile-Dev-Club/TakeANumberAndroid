@@ -10,18 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".UI.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".UI.JoinSessionActivity">
+<<<<<<< HEAD
+
         </activity>
         <activity
             android:name=".UI.HelpSessionActivity"
             android:label="@string/title_activity_help_session"
             android:theme="@style/AppTheme.NoActionBar">
+=======
+>>>>>>> JoinSessionActivityDev
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 
