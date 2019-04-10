@@ -1,4 +1,4 @@
-package club.dev.mobile.ksu.takeanumber.UI;
+package club.dev.mobile.ksu.takeanumber.Data;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -19,11 +19,15 @@ public class HelpSessionAdapter extends ArrayAdapter<HelpSession> {
     private int listItemLayout;
     private List<HelpSession> helpSessionsList;
 
-    public HelpSessionAdapter(@NonNull Context context, int resource, @NonNull List<HelpSession> objects){
-        super(context, resource, objects);
+    public HelpSessionAdapter(@NonNull Context context, int resource){
+        super(context, resource);
         this.context = context;
         this.listItemLayout = resource;
-        helpSessionsList = objects;
+    }
+
+    public void setHelpSessionsList(List<HelpSession> helpSessions) {
+        helpSessionsList = helpSessions;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -41,6 +45,6 @@ public class HelpSessionAdapter extends ArrayAdapter<HelpSession> {
 
     @Override
     public int getCount() {
-        return helpSessionsList.size();
+        return helpSessionsList != null ? helpSessionsList.size() : 0;
     }
 }
