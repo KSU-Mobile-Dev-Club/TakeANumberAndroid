@@ -84,6 +84,8 @@ public class JoinSessionActivity extends AppCompatActivity {
                 enterNameText.setEnabled(true);
                 takeNumberButton.setEnabled(true);
                 displayQueueLocation.setText("");
+
+                mViewModel.removeStudent(testSession.getFirebaseKey(), user.getFirebaseKey());
             }
         });
 

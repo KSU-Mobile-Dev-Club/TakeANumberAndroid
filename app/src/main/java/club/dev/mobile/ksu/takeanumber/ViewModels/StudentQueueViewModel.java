@@ -28,4 +28,9 @@ public class StudentQueueViewModel extends AndroidViewModel {
     public void addStudentToQueue(Student student, String sessionKey) {
         mRepository.addStudentToQueue(student, sessionKey);
     }
+
+    public void removeStudent(String sessionName, String studentKey)
+    {
+        mRepository.Delete(sessionName, studentKey);
+    }
 }
