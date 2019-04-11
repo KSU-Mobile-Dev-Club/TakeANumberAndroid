@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.util.Calendar;
 
 import java.util.List;
 
@@ -21,8 +22,9 @@ import club.dev.mobile.ksu.takeanumber.ViewModels.StudentQueueViewModel;
 
 public class JoinSessionActivity extends AppCompatActivity {
 
-    int queueLocation = 0;
+    int queueLocation = 1;
     Student user;
+    List<Student> studentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,7 @@ public class JoinSessionActivity extends AppCompatActivity {
                 takeNumberButton.setEnabled(false);
                 cancelButton.setEnabled(true);
                 enterNameText.setEnabled(false);
-                user = new Student(userName, 5);
+                user = new Student(userName, Calendar.getInstance().getTimeInMillis());
                 mViewModel.addStudentToQueue(user, testSession.getFirebaseKey());
 
 
