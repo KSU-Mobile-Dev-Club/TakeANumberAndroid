@@ -41,16 +41,16 @@ public class Repository {
         mReference.child("HelpSession2").child(key).setValue(session);
     }
 
-    public void addStudentToQueue(Student student, HelpSession session) {
-        DatabaseReference ref = mReference.child("HelpSession2").child(session.getFirebaseKey()).child("queue");
+    public void addStudentToQueue(Student student, String sessionKey) {
+        DatabaseReference ref = mReference.child("HelpSession2").child(sessionKey).child("queue");
         String key = ref.push().getKey();
         student.setFirebaseKey(key);
         ref.child(key).setValue(student);
     }
 
-    public LiveData<List<Student>> getStudentQueue(HelpSession session) {
+    public LiveData<List<Student>> getStudentQueue(String sessionKey) {
         return Transformations.map(new StudentQueueLiveData(
-                mReference.child("HelpSession2").child(session.getFirebaseKey()).child("queue").orderByChild("dateTime")),
+                mReference.child("HelpSession2").child(sessionKey).child("queue").orderByChild("dateTime")),
                 new StudentQueueDeserializer()
         );
     }

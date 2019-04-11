@@ -19,10 +19,14 @@ public class StudentAdapter extends ArrayAdapter<Student> {
     private Context mContext;
     private List<Student> studentsList;
 
-    public StudentAdapter (@NonNull Context context, ArrayList<Student> list) {
-        super(context, R.layout.student_view, list);
+    public StudentAdapter (@NonNull Context context) {
+        super(context, R.layout.student_view);
         mContext = context;
-        studentsList = list;
+    }
+
+    public void setStudentList(List<Student> students) {
+        studentsList = students;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -44,5 +48,10 @@ public class StudentAdapter extends ArrayAdapter<Student> {
         status.setText(Integer.toString(currentStudent.getStatus()));
 
         return listItem;
+    }
+
+    @Override
+    public int getCount() {
+        return studentsList != null ? studentsList.size() : 0;
     }
 }

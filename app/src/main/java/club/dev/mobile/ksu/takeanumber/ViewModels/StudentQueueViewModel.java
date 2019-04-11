@@ -21,11 +21,11 @@ public class StudentQueueViewModel extends AndroidViewModel {
 
     //Returns the student wait queue associated with the given Help Session
     //The list that is returned will be sorted in ascending order by DateTime
-    public LiveData<List<Student>> getStudentQueue(HelpSession session) {
-        return mRepository.getStudentQueue(session);
+    public LiveData<List<Student>> getStudentQueue(String sessionKey) {
+        return mRepository.getStudentQueue(sessionKey);
     }
 
-    public void addStudentToQueue(Student student, HelpSession session) {
-        mRepository.addStudentToQueue(student, session);
+    public void addStudentToQueue(Student student, String sessionKey) {
+        mRepository.addStudentToQueue(student, sessionKey);
     }
 }
