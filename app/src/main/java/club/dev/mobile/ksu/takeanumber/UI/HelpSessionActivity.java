@@ -1,9 +1,13 @@
 package club.dev.mobile.ksu.takeanumber.UI;
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
@@ -18,7 +22,7 @@ import java.util.List;
 
 public class HelpSessionActivity extends AppCompatActivity {
 
-    ArrayList<Student> studentList = new ArrayList<Student>();
+    List<Student> studentList = new ArrayList<Student>();
     StudentQueueViewModel viewModel;
     StudentAdapter adapter;
 
@@ -35,6 +39,7 @@ public class HelpSessionActivity extends AppCompatActivity {
                     @Override
                     public void onChanged(@Nullable List<Student> students) {
                         adapter.setStudentList(students);
+                        studentList = students;
                     }
                 });
     }
@@ -47,7 +52,38 @@ public class HelpSessionActivity extends AppCompatActivity {
         adapter= new StudentAdapter(this);
         ListView listview = findViewById(R.id.help_session_lv);
         listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                final Student student = studentList.get(position);
+                if(student.getStatus() == 0) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
+                    builder.setMessage("Are You Sure?");
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            student.setStatus(1);
+                        }
+                    });
+                    builder.create().show();
+                }
+                else if(student.getStatus() == 1) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
+                        builder.setMessage("Are You Sure?");
+                        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                student.setStatus(2);
+                                studentList.remove(student);
+
+                            }
+
+                        });
+                    builder.create().show();
+                }
+            }
+        });
     }
+
+
 
 
 }
