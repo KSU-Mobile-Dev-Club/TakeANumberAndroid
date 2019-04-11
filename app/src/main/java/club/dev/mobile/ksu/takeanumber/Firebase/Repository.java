@@ -55,6 +55,11 @@ public class Repository {
         );
     }
 
+    public void Delete(String sessionName, String studentKey)
+    {
+        mReference.child("HelpSession2").child(sessionName).child("queue").child(studentKey).removeValue();
+    }
+
     public LiveData<List<HelpSession>> getHelpSessions() {
         return mHelpSessions;
     }

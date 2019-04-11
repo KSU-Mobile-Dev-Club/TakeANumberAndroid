@@ -52,5 +52,13 @@ public class Student {
         this.firebaseKey = firebaseKey;
     }
 
+    public boolean equals(Student alternate) {
+        if(alternate != null) {
+            return firebaseKey.equals(alternate.firebaseKey);
+        }
+        else {
+            return false;
+        }
+    }
 }
 

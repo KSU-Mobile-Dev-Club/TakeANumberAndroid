@@ -12,17 +12,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import java.util.Calendar;
 
 import java.util.List;
 
 import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
 import club.dev.mobile.ksu.takeanumber.Data.Student;
+import club.dev.mobile.ksu.takeanumber.Data.StudentAdapter;
 import club.dev.mobile.ksu.takeanumber.R;
 import club.dev.mobile.ksu.takeanumber.ViewModels.StudentQueueViewModel;
 
 public class JoinSessionActivity extends AppCompatActivity {
 
-    int queueLocation = 0;
+    int queueLocation = -1;
     Student user;
 
     @Override
@@ -51,19 +53,22 @@ public class JoinSessionActivity extends AppCompatActivity {
 
         final Observer<List<Student>> queueObserver = new Observer<List<Student>>() {
             @Override
-            public void onChanged(List<Student> studentList) {
-                int i = 0;
-                while (studentList.get(i) != user) {
-                    i++;
-                    if (i >= studentList.size()) {
-                        return;
+            public void onChanged(@Nullable List<Student> studentList) {
+                queueLocation = -1;
+                if(studentList != null) {
+                    for (int i = 0; i < studentList.size(); i++) {
+                        if (studentList.get(i).equals(user)) {
+                            queueLocation = i + 1;
+                            displayQueueLocation.setText("You are " + queueLocation + " in line");
+                            break;
+                        }
+                    }
+                    if (queueLocation < 0) {
+                        displayQueueLocation.setText("You are not in line.");
                     }
                 }
-                queueLocation = i;
-
             }
         };
-
 
         mViewModel.getStudentQueue(testSession.getFirebaseKey()).observe(this, queueObserver);
 
@@ -73,12 +78,8 @@ public class JoinSessionActivity extends AppCompatActivity {
                 takeNumberButton.setEnabled(false);
                 cancelButton.setEnabled(true);
                 enterNameText.setEnabled(false);
-                user = new Student(userName, 5);
+                user = new Student(userName, Calendar.getInstance().getTimeInMillis());
                 mViewModel.addStudentToQueue(user, testSession.getFirebaseKey());
-
-
-                displayQueueLocation.setText("You are " + queueLocation + " in line");
-                ;
             }
         });
 
@@ -88,6 +89,8 @@ public class JoinSessionActivity extends AppCompatActivity {
                 enterNameText.setEnabled(true);
                 takeNumberButton.setEnabled(true);
                 displayQueueLocation.setText("");
+
+                mViewModel.removeStudent(testSession.getFirebaseKey(), user.getFirebaseKey());
             }
         });
 
