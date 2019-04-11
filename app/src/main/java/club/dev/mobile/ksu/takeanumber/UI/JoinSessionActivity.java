@@ -17,14 +17,14 @@ import java.util.List;
 
 import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
 import club.dev.mobile.ksu.takeanumber.Data.Student;
+import club.dev.mobile.ksu.takeanumber.Data.StudentAdapter;
 import club.dev.mobile.ksu.takeanumber.R;
 import club.dev.mobile.ksu.takeanumber.ViewModels.StudentQueueViewModel;
 
 public class JoinSessionActivity extends AppCompatActivity {
 
-    int queueLocation = 1;
+    int queueLocation = -1;
     Student user;
-    List<Student> studentList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,19 +49,22 @@ public class JoinSessionActivity extends AppCompatActivity {
 
         final Observer<List<Student>> queueObserver = new Observer<List<Student>>() {
             @Override
-            public void onChanged(List<Student> studentList) {
-                int i = 0;
-                while (studentList.get(i) != user) {
-                    i++;
-                    if (i >= studentList.size()) {
-                        return;
+            public void onChanged(@Nullable List<Student> studentList) {
+                queueLocation = -1;
+                if(studentList != null) {
+                    for (int i = 0; i < studentList.size(); i++) {
+                        if (studentList.get(i).equals(user)) {
+                            queueLocation = i + 1;
+                            displayQueueLocation.setText("You are " + queueLocation + " in line");
+                            break;
+                        }
+                    }
+                    if (queueLocation < 0) {
+                        displayQueueLocation.setText("You are not in line.");
                     }
                 }
-                queueLocation = i;
-
             }
         };
-
 
         mViewModel.getStudentQueue(testSession.getFirebaseKey()).observe(this, queueObserver);
 
@@ -73,10 +76,6 @@ public class JoinSessionActivity extends AppCompatActivity {
                 enterNameText.setEnabled(false);
                 user = new Student(userName, Calendar.getInstance().getTimeInMillis());
                 mViewModel.addStudentToQueue(user, testSession.getFirebaseKey());
-
-
-                displayQueueLocation.setText("You are " + queueLocation + " in line");
-                ;
             }
         });
 
