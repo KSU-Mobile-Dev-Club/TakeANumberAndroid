@@ -59,7 +59,7 @@ public class HelpSessionActivity extends AppCompatActivity {
                 if(student.getStatus() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
                     builder.setMessage("Are You Sure?");
-                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                    builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             student.setStatus(1);
                         }
@@ -69,7 +69,7 @@ public class HelpSessionActivity extends AppCompatActivity {
                 else if(student.getStatus() == 1) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
                         builder.setMessage("Are You Sure?");
-                        builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 student.setStatus(2);
                                 studentList.remove(student);

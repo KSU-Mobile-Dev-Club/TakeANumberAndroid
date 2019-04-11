@@ -2,6 +2,7 @@ package club.dev.mobile.ksu.takeanumber.UI;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -40,7 +41,10 @@ public class JoinSessionActivity extends AppCompatActivity {
         displayQueueLocation.setText("");
 
         final HelpSession testSession = new HelpSession();
-        testSession.setFirebaseKey("-LZ5MACD6FQw9RGHsCJy");
+        Intent intent = getIntent();
+        String key = intent.getStringExtra("sessionKey");
+
+        testSession.setFirebaseKey(key);
 
 
         final StudentQueueViewModel mViewModel = ViewModelProviders.of(this).get(StudentQueueViewModel.class);
