@@ -2,8 +2,10 @@ package club.dev.mobile.ksu.takeanumber.UI;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -46,14 +48,33 @@ public class MainActivity extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(MainActivity.this, JoinSessionActivity.class);
-                intent.putExtra("sessionKey", sessionsList.get(position).getFirebaseKey());
-                MainActivity.this.startActivity(intent);
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                String[] colors = {"Student", "TA"};
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Are you a TA or a student?");
+                builder.setItems(colors, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (which == 0)
+                        {
+                            Intent intent = new Intent(MainActivity.this, JoinSessionActivity.class);
+                            intent.putExtra("sessionKey", sessionsList.get(position).getFirebaseKey());
+                            MainActivity.this.startActivity(intent);
+                        }
+                        else
+                        {
+                            Intent intent = new Intent(MainActivity.this, HelpSessionActivity.class);
+                            intent.putExtra("sessionKey", sessionsList.get(position).getFirebaseKey());
+                            MainActivity.this.startActivity(intent);
+                        }
+                    }
+                });
+                builder.create().show();
             }
         });
 
-        adapter = new HelpSessionAdapter(this, R.layout.list_item); //Adapter(this, R.layout.list_item, sessionsList)
+        adapter = new HelpSessionAdapter(this, R.layout.list_item);
 
         listView.setAdapter(adapter);
     }

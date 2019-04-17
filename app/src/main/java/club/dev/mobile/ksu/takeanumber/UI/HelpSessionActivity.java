@@ -3,6 +3,7 @@ import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -33,8 +34,10 @@ public class HelpSessionActivity extends AppCompatActivity {
 
         addListView();
 
+        String sessionKey = getIntent().getStringExtra("sessionKey");
+
         viewModel = ViewModelProviders.of(this).get(StudentQueueViewModel.class);
-        viewModel.getStudentQueue("-LZ5MACD6FQw9RGHsCJy").observe(
+        viewModel.getStudentQueue(sessionKey).observe(
                 this, new Observer<List<Student>>() {
                     @Override
                     public void onChanged(@Nullable List<Student> students) {
