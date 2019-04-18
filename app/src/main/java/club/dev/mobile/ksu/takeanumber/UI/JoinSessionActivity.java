@@ -2,8 +2,11 @@ package club.dev.mobile.ksu.takeanumber.UI;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.VibrationEffect;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -13,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import java.util.Calendar;
+import android.os.Vibrator;
 
 import java.util.List;
 
@@ -49,17 +53,28 @@ public class JoinSessionActivity extends AppCompatActivity {
         testSession.setFirebaseKey(key);
 
 
+
         final StudentQueueViewModel mViewModel = ViewModelProviders.of(this).get(StudentQueueViewModel.class);
 
         final Observer<List<Student>> queueObserver = new Observer<List<Student>>() {
             @Override
             public void onChanged(@Nullable List<Student> studentList) {
+
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
                 queueLocation = -1;
                 if(studentList != null) {
                     for (int i = 0; i < studentList.size(); i++) {
                         if (studentList.get(i).equals(user)) {
-                            queueLocation = i + 1;
-                            displayQueueLocation.setText("You are " + queueLocation + " in line");
+                            if(studentList.get(i).getStatus() == 1){
+                                queueLocation = i + 1;
+                                displayQueueLocation.setText("You are ready to be helped!");
+                                v.vibrate(1000);
+                            }
+                            else{
+                                queueLocation = i + 1;
+                                displayQueueLocation.setText("You are " + queueLocation + " in line");
+                            }
                             break;
                         }
                     }
