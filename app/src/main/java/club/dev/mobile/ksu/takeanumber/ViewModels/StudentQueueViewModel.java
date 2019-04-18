@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
 import club.dev.mobile.ksu.takeanumber.Data.Student;
 import club.dev.mobile.ksu.takeanumber.Firebase.Repository;
 
@@ -31,6 +30,11 @@ public class StudentQueueViewModel extends AndroidViewModel {
 
     public void removeStudent(String sessionName, String studentKey)
     {
-        mRepository.Delete(sessionName, studentKey);
+        mRepository.deleteStudent(sessionName, studentKey);
+    }
+
+    public void updateStudent(String sessionName, Student student)
+    {
+        mRepository.updateStudent(sessionName, student);
     }
 }

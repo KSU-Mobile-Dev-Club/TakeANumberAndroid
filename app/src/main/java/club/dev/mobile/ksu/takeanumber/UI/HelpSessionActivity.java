@@ -26,6 +26,7 @@ public class HelpSessionActivity extends AppCompatActivity {
     List<Student> studentList = new ArrayList<Student>();
     StudentQueueViewModel viewModel;
     StudentAdapter adapter;
+    String sessionKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,7 @@ public class HelpSessionActivity extends AppCompatActivity {
 
         addListView();
 
-        String sessionKey = getIntent().getStringExtra("sessionKey");
+        sessionKey = getIntent().getStringExtra("sessionKey");
 
         viewModel = ViewModelProviders.of(this).get(StudentQueueViewModel.class);
         viewModel.getStudentQueue(sessionKey).observe(
@@ -65,6 +66,7 @@ public class HelpSessionActivity extends AppCompatActivity {
                     builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             student.setStatus(1);
+                            viewModel.updateStudent(sessionKey, student);
                         }
                     });
                     builder.create().show();
@@ -75,7 +77,7 @@ public class HelpSessionActivity extends AppCompatActivity {
                         builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 student.setStatus(2);
-                                studentList.remove(student);
+                                viewModel.removeStudent(sessionKey, student.getFirebaseKey());
 
                             }
 
