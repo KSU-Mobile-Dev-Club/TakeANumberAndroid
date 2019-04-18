@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -58,14 +59,15 @@ public class HelpSessionActivity extends AppCompatActivity {
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final Student student = studentList.get(position);
                 if(student.getStatus() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
-                    builder.setMessage("Are You Sure?");
+                    builder.setMessage("Are you helping them now?");
                     builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             student.setStatus(1);
+                            view.setBackgroundColor(Color.parseColor("#2196F3"));
                             viewModel.updateStudent(sessionKey, student);
                         }
                     });
@@ -73,7 +75,7 @@ public class HelpSessionActivity extends AppCompatActivity {
                 }
                 else if(student.getStatus() == 1) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
-                        builder.setMessage("Are You Sure?");
+                        builder.setMessage("Are you done helping them, really?");
                         builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 student.setStatus(2);
