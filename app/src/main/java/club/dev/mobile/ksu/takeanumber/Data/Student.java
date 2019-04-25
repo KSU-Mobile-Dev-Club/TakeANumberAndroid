@@ -10,15 +10,17 @@ public class Student {
     private long dateTime;
     private int currentStatus; //0: waiting, 1: being helped, 2: already helped
     private String firebaseKey;
+    private int helpTime;
 
     Student(){
 
     }
 
-    public Student (String n, long dt) {
+    public Student (String n, long dt, int t) {
         name = n;
         dateTime = dt;
         currentStatus = 0;
+        helpTime = t;
     }
 
     public String getName() {return name;}
@@ -42,6 +44,10 @@ public class Student {
     public void setStatus(int s) {
         currentStatus = s;
     }
+
+    public int getTime() { return helpTime; }
+
+    public void setTime(int t) { helpTime = t; }
 
     @Exclude
     public String getFirebaseKey() {
