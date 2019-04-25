@@ -45,6 +45,7 @@ public class JoinSessionActivity extends AppCompatActivity {
         cancelButton.setEnabled(false);
         enterNameText.setEnabled(true);
         displayQueueLocation.setText("");
+        getSupportActionBar().setTitle(R.string.title_activity_join_session);
 
         final HelpSession testSession = new HelpSession();
         Intent intent = getIntent();

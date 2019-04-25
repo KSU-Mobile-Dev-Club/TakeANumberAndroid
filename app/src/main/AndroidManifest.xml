@@ -21,8 +21,7 @@
         </activity>
         <activity
             android:name=".UI.HelpSessionActivity"
-            android:label="@string/title_activity_help_session"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/title_activity_help_session">
         </activity>
     </application>
 

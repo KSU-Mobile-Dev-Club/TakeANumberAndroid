@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">TakeANumber</string>
-    <string name="title_activity_help_session">HelpSessionActivity</string>
+    <string name="app_name">Take A Number</string>
+    <string name="title_activity_help_session">TA View</string>
+    <string name="title_activity_join_session">Join Session</string>
 </resources>
