@@ -10,6 +10,7 @@ public class Student {
     private long dateTime;
     private int currentStatus; //0: waiting, 1: being helped, 2: already helped
     private String firebaseKey;
+    private boolean pressNo;
 
     Student(){
 
@@ -59,6 +60,14 @@ public class Student {
         else {
             return false;
         }
+    }
+
+    public boolean isPressNo() {
+        return pressNo;
+    }
+
+    public void setPressNo(boolean pressNo) {
+        this.pressNo = pressNo;
     }
 }
 

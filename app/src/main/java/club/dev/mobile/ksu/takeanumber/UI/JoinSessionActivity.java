@@ -1,9 +1,12 @@
 package club.dev.mobile.ksu.takeanumber.UI;
 
+import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
@@ -11,9 +14,12 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import java.util.Calendar;
 import android.os.Vibrator;
@@ -40,6 +46,8 @@ public class JoinSessionActivity extends AppCompatActivity {
         final Button cancelButton = findViewById(R.id.cancel);
         final EditText enterNameText = findViewById(R.id.nameText);
         final TextView displayQueueLocation = findViewById(R.id.displayInQueue);
+        final PopupWindow popup = new PopupWindow();
+        final LinearLayout layout = new LinearLayout(this);
 
         takeNumberButton.setEnabled(false);
         cancelButton.setEnabled(false);
@@ -70,6 +78,8 @@ public class JoinSessionActivity extends AppCompatActivity {
                                 queueLocation = i + 1;
                                 displayQueueLocation.setText("You are ready to be helped!");
                                 v.vibrate(1000);
+                                ShowDialog(studentList);
+
                             }
                             else{
                                 queueLocation = i + 1;
@@ -84,6 +94,7 @@ public class JoinSessionActivity extends AppCompatActivity {
                 }
             }
         };
+
 
         mViewModel.getStudentQueue(testSession.getFirebaseKey()).observe(this, queueObserver);
 
@@ -129,5 +140,28 @@ public class JoinSessionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void ShowDialog(final List<Student> studentList)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(JoinSessionActivity.this);
+        builder.setMessage("Are you ready to be helped?");
+        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+
+            }
+        });
+        builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(studentList != null) {
+                    Student s = studentList.get(studentList.size() / 2);
+                    user.setDateTime(s.getDateTime() - 1);
+                    user.setStatus(0);
+                    user.setPressNo(true);
+                }
+            }
+        });
+        builder.create().show();
     }
 }
