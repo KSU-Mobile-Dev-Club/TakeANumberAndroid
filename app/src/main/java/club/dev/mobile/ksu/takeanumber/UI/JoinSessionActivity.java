@@ -4,9 +4,11 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -64,6 +66,7 @@ public class JoinSessionActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<Student> studentList) {
 
+                final SharedPreferences sharedSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
                 queueLocation = -1;
@@ -73,7 +76,10 @@ public class JoinSessionActivity extends AppCompatActivity {
                             if(studentList.get(i).getStatus() == 1){
                                 queueLocation = i + 1;
                                 displayQueueLocation.setText("You are ready to be helped!");
-                                v.vibrate(1000);
+
+                                if(sharedSettings.getBoolean("buzz_for_notification", false)) {
+                                    v.vibrate(1000);
+                                }
                             }
                             else{
                                 queueLocation = i + 1;
