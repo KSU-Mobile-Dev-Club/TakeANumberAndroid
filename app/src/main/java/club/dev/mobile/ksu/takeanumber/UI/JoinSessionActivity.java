@@ -50,13 +50,16 @@ public class JoinSessionActivity extends AppCompatActivity {
         final Button takeNumberButton = findViewById(R.id.takeNumber);
         final Button cancelButton = findViewById(R.id.cancel);
         final EditText enterNameText = findViewById(R.id.nameText);
+        final EditText enterTime = findViewById(R.id.timeText);
         final TextView displayQueueLocation = findViewById(R.id.displayInQueue);
         final PopupWindow popup = new PopupWindow();
         final LinearLayout layout = new LinearLayout(this);
+        final TextView time = findViewById(R.id.time);
 
         takeNumberButton.setEnabled(false);
         cancelButton.setEnabled(false);
         enterNameText.setEnabled(true);
+        enterTime.setEnabled(true);
         displayQueueLocation.setText("");
         getSupportActionBar().setTitle(R.string.title_activity_join_session);
 
@@ -77,9 +80,13 @@ public class JoinSessionActivity extends AppCompatActivity {
                 final SharedPreferences sharedSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
+                int totalTime = 0;
+
                 queueLocation = -1;
                 if(studentList != null) {
                     for (int i = 0; i < studentList.size(); i++) {
+                        totalTime += studentList.get(i).getTime();
+
                         if (studentList.get(i).equals(user)) {
                             if(studentList.get(i).getStatus() == 1){
                                 queueLocation = i + 1;
@@ -100,6 +107,7 @@ public class JoinSessionActivity extends AppCompatActivity {
                     }
                     if (queueLocation < 0) {
                         displayQueueLocation.setText("You are not in line.");
+                        time.setText("Estimated wait time: " + totalTime + " minutes");
                     }
                 }
             }
@@ -111,11 +119,15 @@ public class JoinSessionActivity extends AppCompatActivity {
         takeNumberButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 String userName = enterNameText.getText().toString();
+                int time = Integer.parseInt(enterTime.getText().toString());
                 takeNumberButton.setEnabled(false);
                 cancelButton.setEnabled(true);
                 enterNameText.setEnabled(false);
-                user = new Student(userName, Calendar.getInstance().getTimeInMillis());
+                enterTime.setEnabled(false);
+                user = new Student(userName, Calendar.getInstance().getTimeInMillis(), time);
                 mViewModel.addStudentToQueue(user, testSession.getFirebaseKey());
+
+
             }
         });
 
