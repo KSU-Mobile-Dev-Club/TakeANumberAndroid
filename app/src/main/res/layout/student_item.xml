@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
 
     <TextView
         android:id="@+id/student_name"
@@ -16,6 +21,8 @@
         android:id="@+id/student_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-
+    <TextView
+        android:id="@+id/student_estimated_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>

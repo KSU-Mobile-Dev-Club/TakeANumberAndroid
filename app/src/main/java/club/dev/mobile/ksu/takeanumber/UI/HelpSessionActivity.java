@@ -1,4 +1,5 @@
 package club.dev.mobile.ksu.takeanumber.UI;
+
 import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -15,11 +16,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
 import club.dev.mobile.ksu.takeanumber.Data.Student;
 import club.dev.mobile.ksu.takeanumber.Data.StudentAdapter;
 import club.dev.mobile.ksu.takeanumber.R;
-import club.dev.mobile.ksu.takeanumber.ViewModels.HelpSessionViewModel;
 import club.dev.mobile.ksu.takeanumber.ViewModels.StudentQueueViewModel;
 
 import java.util.ArrayList;

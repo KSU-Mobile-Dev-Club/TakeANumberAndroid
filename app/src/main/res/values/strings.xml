@@ -4,6 +4,12 @@
     <string name="title_activity_join_session">Join Session</string>
     <string name="title_activity_settings">Settings</string>
 
+    <string name="action_cancel">Cancel</string>
+    <string name="action_okay">Okay</string>
+
+    <string name="text_box_hint_name">Name</string>
+    <string name="text_box_hint_wait_time">How long?</string>
+
     <!-- Strings related to Settings -->
 
     <!-- Settings for Notifications -->

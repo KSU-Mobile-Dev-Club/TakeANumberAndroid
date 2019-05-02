@@ -2,8 +2,6 @@ package club.dev.mobile.ksu.takeanumber.Data;
 
 import com.google.firebase.database.Exclude;
 
-import java.time.LocalTime;
-
 public class Student {
 
     private String name;

@@ -7,10 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.VibrationEffect;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -19,7 +16,6 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,7 +29,6 @@ import java.util.List;
 
 import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
 import club.dev.mobile.ksu.takeanumber.Data.Student;
-import club.dev.mobile.ksu.takeanumber.Data.StudentAdapter;
 import club.dev.mobile.ksu.takeanumber.R;
 import club.dev.mobile.ksu.takeanumber.ViewModels.StudentQueueViewModel;
 
@@ -89,18 +84,28 @@ public class JoinSessionActivity extends AppCompatActivity {
 
                         if (studentList.get(i).equals(user)) {
                             if(studentList.get(i).getStatus() == 1){
-                                queueLocation = i + 1;
                                 displayQueueLocation.setText("You are ready to be helped!");
 
                                 if(sharedSettings.getBoolean("buzz_for_notification", false)) {
                                     v.vibrate(1000);
                                 }
                                 ShowDialog(studentList);
-
                             }
                             else{
                                 queueLocation = i + 1;
-                                displayQueueLocation.setText("You are " + queueLocation + " in line");
+                                time.setText("Estimated wait time: " + totalTime + " minutes");
+                                if (queueLocation > 3) {
+                                    displayQueueLocation.setText("You are " + queueLocation + "th in line");
+                                }
+                                else if (queueLocation > 2) {
+                                    displayQueueLocation.setText("You are " + queueLocation + "rd in line");
+                                }
+                                else if (queueLocation > 1) {
+                                    displayQueueLocation.setText("You are " + queueLocation + "nd in line");
+                                }
+                                else {
+                                    displayQueueLocation.setText("You are " + queueLocation + "st in line");
+                                }
                             }
                             break;
                         }
@@ -136,6 +141,7 @@ public class JoinSessionActivity extends AppCompatActivity {
                 cancelButton.setEnabled(false);
                 enterNameText.setEnabled(true);
                 takeNumberButton.setEnabled(true);
+                enterTime.setEnabled(true);
                 displayQueueLocation.setText("");
 
                 mViewModel.removeStudent(testSession.getFirebaseKey(), user.getFirebaseKey());
@@ -150,7 +156,30 @@ public class JoinSessionActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (enterNameText.getText().toString().equals("")) {
+                if (enterNameText.getText().toString().equals("") ||
+                        enterTime.getText().toString().equals("")) {
+                    takeNumberButton.setEnabled(false);
+                } else {
+                    takeNumberButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        enterTime.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (enterNameText.getText().toString().equals("") ||
+                        enterTime.getText().toString().equals("")) {
                     takeNumberButton.setEnabled(false);
                 } else {
                     takeNumberButton.setEnabled(true);

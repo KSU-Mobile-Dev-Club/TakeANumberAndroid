@@ -1,11 +1,9 @@
 package club.dev.mobile.ksu.takeanumber.UI;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 
 import club.dev.mobile.ksu.takeanumber.R;

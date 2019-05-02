@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new HelpSessionAdapter(this, R.layout.list_item);
+        adapter = new HelpSessionAdapter(this, R.layout.help_session_item);
 
         listView.setAdapter(adapter);
     }

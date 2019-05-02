@@ -1,7 +1,6 @@
 package club.dev.mobile.ksu.takeanumber.Data;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -10,7 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.util.Date;
 import java.util.List;
 
 import club.dev.mobile.ksu.takeanumber.R;
@@ -20,7 +20,7 @@ public class StudentAdapter extends ArrayAdapter<Student> {
     private List<Student> studentsList;
 
     public StudentAdapter (@NonNull Context context) {
-        super(context, R.layout.student_view);
+        super(context, R.layout.student_item);
         mContext = context;
     }
 
@@ -33,19 +33,34 @@ public class StudentAdapter extends ArrayAdapter<Student> {
     @Override
     public View getView (int position , @Nullable View listItem , @NonNull ViewGroup parent) {
         if(listItem == null)
-            listItem = LayoutInflater.from(mContext).inflate(R.layout.student_view , parent , false);
+            listItem = LayoutInflater.from(mContext).inflate(R.layout.student_item, parent , false);
 
         Student currentStudent = studentsList.get(position);
 
-        TextView name = (TextView) listItem.findViewById(R.id.student_name);
+        TextView name = listItem.findViewById(R.id.student_name);
         name.setText(currentStudent.getName());
 
-        TextView dateTime = (TextView) listItem.findViewById(R.id.student_datetime);
-        String tempTime = Long.toString(currentStudent.getDateTime());
-        dateTime.setText(tempTime);
+        TextView dateTime = listItem.findViewById(R.id.student_datetime);
+        Date date = new Date(currentStudent.getDateTime());
+        String dateString = DateFormat.getDateTimeInstance().format(date);
+        dateTime.setText(dateString);
 
-        TextView status = (TextView) listItem.findViewById(R.id.student_status);
-        status.setText(Integer.toString(currentStudent.getStatus()));
+        TextView status = listItem.findViewById(R.id.student_status);
+        String tempString;
+
+        if (currentStudent.getStatus() == 0) {
+            tempString = "Waiting for Help";
+        }
+        else if (currentStudent.getStatus() == 1) {
+            tempString = "Being Helped";
+        }
+        else {
+            tempString = "Unknown Status (" + currentStudent.getStatus() + ")";
+        }
+        status.setText(tempString);
+
+        TextView estimatedTime = listItem.findViewById(R.id.student_estimated_time);
+        estimatedTime.setText("Estimated Time: " + currentStudent.getTime() + " minutes.");
 
         return listItem;
     }

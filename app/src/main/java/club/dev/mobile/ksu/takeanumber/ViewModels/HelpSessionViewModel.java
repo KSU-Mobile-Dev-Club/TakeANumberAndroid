@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import java.util.List;
 
 import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
-import club.dev.mobile.ksu.takeanumber.Data.Student;
 import club.dev.mobile.ksu.takeanumber.Firebase.Repository;
 
 public class HelpSessionViewModel extends AndroidViewModel {
