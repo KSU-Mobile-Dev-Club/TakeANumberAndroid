@@ -64,8 +64,6 @@ public class JoinSessionActivity extends AppCompatActivity {
 
         testSession.setFirebaseKey(key);
 
-
-
         final StudentQueueViewModel mViewModel = ViewModelProviders.of(this).get(StudentQueueViewModel.class);
 
         final Observer<List<Student>> queueObserver = new Observer<List<Student>>() {
@@ -84,35 +82,35 @@ public class JoinSessionActivity extends AppCompatActivity {
 
                         if (studentList.get(i).equals(user)) {
                             if(studentList.get(i).getStatus() == 1){
-                                displayQueueLocation.setText("You are ready to be helped!");
+                                displayQueueLocation.setText(getString(R.string.student_message_ready_for_help));
 
-                                if(sharedSettings.getBoolean("buzz_for_notification", false)) {
+                                if (sharedSettings.getBoolean("buzz_for_notification", false)) {
                                     v.vibrate(1000);
                                 }
                                 ShowDialog(studentList);
                             }
                             else{
                                 queueLocation = i + 1;
-                                time.setText("Estimated wait time: " + totalTime + " minutes");
+                                time.setText(getString(R.string.student_message_estimated_wait_time, totalTime));
                                 if (queueLocation > 3) {
-                                    displayQueueLocation.setText("You are " + queueLocation + "th in line");
+                                    displayQueueLocation.setText(getString(R.string.student_message_queue_location_fourth, queueLocation));
                                 }
                                 else if (queueLocation > 2) {
-                                    displayQueueLocation.setText("You are " + queueLocation + "rd in line");
+                                    displayQueueLocation.setText(getString(R.string.student_message_queue_location_third, queueLocation));
                                 }
                                 else if (queueLocation > 1) {
-                                    displayQueueLocation.setText("You are " + queueLocation + "nd in line");
+                                    displayQueueLocation.setText(getString(R.string.student_message_queue_location_second, queueLocation));
                                 }
                                 else {
-                                    displayQueueLocation.setText("You are " + queueLocation + "st in line");
+                                    displayQueueLocation.setText(getString(R.string.student_message_queue_location_first, queueLocation));
                                 }
                             }
                             break;
                         }
                     }
                     if (queueLocation < 0) {
-                        displayQueueLocation.setText("You are not in line.");
-                        time.setText("Estimated wait time: " + totalTime + " minutes");
+                        displayQueueLocation.setText(getString(R.string.student_message_not_in_line));
+                        time.setText(getString(R.string.student_message_estimated_wait_time, totalTime));
                     }
                 }
             }
@@ -222,16 +220,16 @@ public class JoinSessionActivity extends AppCompatActivity {
     public void ShowDialog(final List<Student> studentList)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinSessionActivity.this);
-        builder.setMessage("Are you ready to be helped?");
-        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+        builder.setMessage(getString(R.string.student_message_ready_for_help_question));
+        builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
 
             }
         });
-        builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.action_no), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(studentList != null) {
+                if (studentList != null) {
                     Student s = studentList.get(studentList.size() / 2);
                     user.setDateTime(s.getDateTime() - 1);
                     user.setStatus(0);

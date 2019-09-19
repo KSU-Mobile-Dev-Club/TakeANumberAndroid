@@ -65,8 +65,8 @@ public class HelpSessionActivity extends AppCompatActivity {
                 final Student student = studentList.get(position);
                 if(student.getStatus() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
-                    builder.setMessage("Are you helping them now?");
-                    builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    builder.setMessage(getString(R.string.ta_is_helping_question));
+                    builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             student.setStatus(1);
                             view.setBackgroundColor(Color.parseColor("#2196F3"));
@@ -77,8 +77,8 @@ public class HelpSessionActivity extends AppCompatActivity {
                 }
                 else if(student.getStatus() == 1) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
-                        builder.setMessage("Are you done helping them, really?");
-                        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        builder.setMessage(getString(R.string.ta_done_helping_question));
+                        builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 student.setStatus(2);
                                 viewModel.removeStudent(sessionKey, student.getFirebaseKey());
