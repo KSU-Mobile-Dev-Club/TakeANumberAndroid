@@ -45,17 +45,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
         listView = findViewById(R.id.HelpSessionListView);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                String[] colors = {"Student", "TA"};
+                String[] colors = {getString(R.string.student), getString(R.string.ta)};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Are you a TA or a student?");
+                builder.setTitle(getString(R.string.ta_student_question));
                 builder.setItems(colors, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

@@ -4,13 +4,38 @@
     <string name="title_activity_join_session">Join Session</string>
     <string name="title_activity_settings">Settings</string>
 
+    <string name="action_yes">Yes</string>
+    <string name="action_no">No</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_okay">Okay</string>
 
     <string name="text_box_hint_name">Name</string>
     <string name="text_box_hint_wait_time">How long?</string>
 
-    <!-- Strings related to Settings -->
+    <!-- MainActivity -->
+    <string name="ta_student_question">TA or Student?</string>
+    <string name="ta">TA</string>
+    <string name="student">Student</string>
+
+    <!-- StudentAdapter -->
+    <string name="student_status_waiting">Waiting for Help</string>
+    <string name="student_status_helping">Being Helped</string>
+    <string name="student_status_unknown">Unknown Status (%1$d)</string>
+    <string name="estimated_time">Estimated Time: %1$d minutes</string>
+
+    <!-- HelpSessionActivity -->
+    <string name="ta_is_helping_question">Are you currently helping them?</string>
+    <string name="ta_done_helping_question">Are you finished helping them?</string>
+
+    <!-- JoinSessionActivity -->
+    <string name="student_message_ready_for_help">You are ready to be helped!</string>
+    <string name="student_message_estimated_wait_time">Estimated wait time: %1$d minutes</string>
+    <string name="student_message_queue_location_fourth">You are %1$dth in line</string>
+    <string name="student_message_queue_location_third">You are %1$drd in line</string>
+    <string name="student_message_queue_location_second">You are %1$dnd in line</string>
+    <string name="student_message_queue_location_first">You are %1$dst in line</string>
+    <string name="student_message_not_in_line">You are not in line</string>
+    <string name="student_message_ready_for_help_question">Are you ready?</string>
 
     <!-- Settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>

@@ -5,7 +5,6 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +25,7 @@ import java.util.List;
 
 public class HelpSessionActivity extends AppCompatActivity {
 
-    List<Student> studentList = new ArrayList<Student>();
+    List<Student> studentList = new ArrayList<>();
     StudentQueueViewModel viewModel;
     StudentAdapter adapter;
     String sessionKey;
@@ -65,11 +64,10 @@ public class HelpSessionActivity extends AppCompatActivity {
                 final Student student = studentList.get(position);
                 if(student.getStatus() == 0) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
-                    builder.setMessage("Are you helping them now?");
-                    builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    builder.setMessage(getString(R.string.ta_is_helping_question));
+                    builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             student.setStatus(1);
-                            view.setBackgroundColor(Color.parseColor("#2196F3"));
                             viewModel.updateStudent(sessionKey, student);
                         }
                     });
@@ -77,8 +75,8 @@ public class HelpSessionActivity extends AppCompatActivity {
                 }
                 else if(student.getStatus() == 1) {
                         AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
-                        builder.setMessage("Are you done helping them, really?");
-                        builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        builder.setMessage(getString(R.string.ta_done_helping_question));
+                        builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 student.setStatus(2);
                                 viewModel.removeStudent(sessionKey, student.getFirebaseKey());

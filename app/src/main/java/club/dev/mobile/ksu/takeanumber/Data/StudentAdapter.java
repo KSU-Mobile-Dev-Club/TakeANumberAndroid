@@ -49,18 +49,18 @@ public class StudentAdapter extends ArrayAdapter<Student> {
         String tempString;
 
         if (currentStudent.getStatus() == 0) {
-            tempString = "Waiting for Help";
+            tempString = getContext().getString(R.string.student_status_waiting);
         }
         else if (currentStudent.getStatus() == 1) {
-            tempString = "Being Helped";
+            tempString = getContext().getString(R.string.student_status_helping);
         }
         else {
-            tempString = "Unknown Status (" + currentStudent.getStatus() + ")";
+            tempString = getContext().getString(R.string.student_status_unknown, currentStudent.getStatus());
         }
         status.setText(tempString);
 
         TextView estimatedTime = listItem.findViewById(R.id.student_estimated_time);
-        estimatedTime.setText("Estimated Time: " + currentStudent.getTime() + " minutes.");
+        estimatedTime.setText(getContext().getString(R.string.estimated_time, currentStudent.getTime()));
 
         return listItem;
     }
