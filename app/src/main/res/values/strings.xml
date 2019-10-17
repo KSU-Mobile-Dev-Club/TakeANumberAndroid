@@ -8,6 +8,7 @@
     <string name="action_no">No</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_okay">Okay</string>
+    <string name="action_add_session">Add Session</string>
 
     <string name="text_box_hint_name">Name</string>
     <string name="text_box_hint_wait_time">How long?</string>

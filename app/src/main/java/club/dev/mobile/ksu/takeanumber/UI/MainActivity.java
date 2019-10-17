@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,15 +28,19 @@ import club.dev.mobile.ksu.takeanumber.ViewModels.HelpSessionViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<HelpSession> sessionsList = new ArrayList<HelpSession>();
-    HelpSessionAdapter adapter;
-    ListView listView;
-    HelpSessionViewModel viewModel;
+    private List<HelpSession> sessionsList = new ArrayList<HelpSession>();
+    private HelpSessionAdapter adapter;
+    private ListView listView;
+    private HelpSessionViewModel viewModel;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
 
         viewModel = ViewModelProviders.of(this).get(HelpSessionViewModel.class);
 
@@ -73,6 +80,16 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 builder.create().show();
+            }
+        });
+
+        // Set up floating action button
+        FloatingActionButton addSessionButton = findViewById(R.id.AddSessionButton);
+        addSessionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Sign in user anonymously and bring them to the page to add a help session
+                // as a TA.
             }
         });
 
