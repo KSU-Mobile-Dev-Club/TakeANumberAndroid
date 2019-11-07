@@ -1,5 +1,6 @@
 package club.dev.mobile.ksu.takeanumber.UI;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
@@ -14,9 +15,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +102,32 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HelpSessionAdapter(this, R.layout.help_session_item);
 
         listView.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        if (mAuth.getCurrentUser() == null) {
+            mAuth.signInAnonymously()
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (!task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this,
+                                "Failed to sign in Anonymously", Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        Toast.makeText(MainActivity.this, "Signed in anonymously",
+                                Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+        else {
+            Toast.makeText(MainActivity.this, "Already signed in",
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
 
