@@ -1,7 +1,31 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
-        android:defaultValue="true"
-        android:key="buzz_for_notification"
-        android:title="@string/notification_buzz" />
+    <PreferenceCategory
+        android:title="@string/pref_header_notifications"
+        >
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="buzz_for_notification"
+            android:title="@string/notification_buzz" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_user_information">
+
+        <EditTextPreference
+            android:title="@string/default_user_name"
+            android:key="key_user_name" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/pref_header_developer_settings">
+
+        <EditTextPreference
+            android:title="@string/developer_user_id"
+            android:key="key_user_id" />
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

@@ -41,4 +41,8 @@
     <!-- Settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
     <string name="notification_buzz">Buzz for Notification</string>
+    <string name="pref_header_user_information">User Information</string>
+    <string name="default_user_name">Default User Name</string>
+    <string name="pref_header_developer_settings">Developer Settings</string>
+    <string name="developer_user_id">User Id</string>
 </resources>
