@@ -8,6 +8,9 @@ import android.content.Intent;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,7 +37,7 @@ import club.dev.mobile.ksu.takeanumber.ViewModels.HelpSessionViewModel;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<HelpSession> sessionsList = new ArrayList<HelpSession>();
+    private List<HelpSession> sessionsList = new ArrayList<>();
     private HelpSessionAdapter adapter;
     private ListView listView;
     private HelpSessionViewModel viewModel;
@@ -127,6 +130,13 @@ public class MainActivity extends AppCompatActivity {
         else {
             Toast.makeText(MainActivity.this, "Already signed in",
                     Toast.LENGTH_LONG).show();
+        }
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        if (mAuth.getCurrentUser() != null &&
+                !mAuth.getCurrentUser().getUid().equals(sharedPreferences.getString("key_user_id", ""))) {
+            sharedPreferences.edit().putString("key_user_id", mAuth.getCurrentUser().getUid()).apply();
         }
     }
 
