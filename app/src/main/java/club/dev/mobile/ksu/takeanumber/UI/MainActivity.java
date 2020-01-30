@@ -99,6 +99,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Sign in user anonymously and bring them to the page to add a help session
                 // as a TA.
+                Intent intent = new Intent(MainActivity.this, AddHelpSessionActivity.class);
+                MainActivity.this.startActivity(intent);
             }
         });
 

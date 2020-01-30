@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Take a Number"
+        android:text="@string/action_take_a_number"
         app:layout_constraintBottom_toTopOf="@+id/nameText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,6 +31,7 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/text_box_hint_name"
+        android:autofillHints=".AUTOFILL_HINT_NAME"
         app:layout_constraintBottom_toTopOf="@+id/cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,6 +46,7 @@
         android:ems="10"
         android:inputType="number"
         android:hint="@string/text_box_hint_wait_time"
+        android:importantForAutofill="no"
         app:layout_constraintBottom_toTopOf="@+id/cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -26,10 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.JoinSessionActivity"></activity>
+        <activity android:name=".UI.JoinSessionActivity" />
         <activity
             android:name=".UI.HelpSessionActivity"
-            android:label="@string/title_activity_help_session"></activity>
+            android:label="@string/title_activity_help_session" />
+        <activity android:name=".UI.AddHelpSessionActivity"/>
     </application>
 
 </manifest>

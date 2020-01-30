@@ -29,6 +29,7 @@
     <string name="ta_done_helping_question">Are you finished helping them?</string>
 
     <!-- JoinSessionActivity -->
+    <string name="action_take_a_number">Take A Number</string>
     <string name="student_message_ready_for_help">You are ready to be helped!</string>
     <string name="student_message_estimated_wait_time">Estimated wait time: %1$d minutes</string>
     <string name="student_message_queue_location_fourth">You are %1$dth in line</string>
@@ -37,6 +38,10 @@
     <string name="student_message_queue_location_first">You are %1$dst in line</string>
     <string name="student_message_not_in_line">You are not in line</string>
     <string name="student_message_ready_for_help_question">Are you ready?</string>
+
+    <!-- AddHelpSessionActivity -->
+    <string name="action_create_session">Create Session</string>
+    <string name="hint_session_name">Session Name</string>
 
     <!-- Settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
