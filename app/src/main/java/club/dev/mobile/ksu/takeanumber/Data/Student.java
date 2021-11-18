@@ -11,6 +11,9 @@ public class Student {
     private boolean pressNo;
     private int helpTime;
 
+    // Required for Firebase - do not remove
+    public Student() {}
+
     public Student (String n, long dt, int t) {
         name = n;
         dateTime = dt;
