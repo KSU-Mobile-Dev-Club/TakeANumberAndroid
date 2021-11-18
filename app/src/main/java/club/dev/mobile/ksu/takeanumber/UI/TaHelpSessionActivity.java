@@ -24,7 +24,7 @@ import club.dev.mobile.ksu.takeanumber.Data.StudentAdapter;
 import club.dev.mobile.ksu.takeanumber.R;
 import club.dev.mobile.ksu.takeanumber.ViewModels.StudentQueueViewModel;
 
-public class HelpSessionActivity extends AppCompatActivity {
+public class TaHelpSessionActivity extends AppCompatActivity {
 
     List<Student> studentList = new ArrayList<>();
     StudentQueueViewModel viewModel;
@@ -56,7 +56,7 @@ public class HelpSessionActivity extends AppCompatActivity {
     }
 
     void addListView() {
-        adapter= new StudentAdapter(this);
+        adapter = new StudentAdapter(this);
         ListView listview = findViewById(R.id.help_session_lv);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -64,7 +64,7 @@ public class HelpSessionActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final Student student = studentList.get(position);
                 if(student.getStatus() == 0) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TaHelpSessionActivity.this);
                     builder.setMessage(getString(R.string.ta_is_helping_question));
                     builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -75,7 +75,7 @@ public class HelpSessionActivity extends AppCompatActivity {
                     builder.create().show();
                 }
                 else if(student.getStatus() == 1) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(TaHelpSessionActivity.this);
                         builder.setMessage(getString(R.string.ta_done_helping_question));
                         builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {

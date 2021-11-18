@@ -5,9 +5,11 @@ import com.google.firebase.database.Exclude;
 public class HelpSession {
     private String name;
     private String firebaseKey;
+    private String taUserKey;
 
-    public HelpSession(String name) {
+    public HelpSession(String name, String taUserKey) {
         this.name = name;
+        this.taUserKey = taUserKey;
     }
 
     public HelpSession() {}
@@ -18,6 +20,14 @@ public class HelpSession {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTaUserKey() {
+        return taUserKey;
+    }
+
+    public void setTaUserKey(String taUserKey) {
+        this.taUserKey = taUserKey;
     }
 
     @Exclude

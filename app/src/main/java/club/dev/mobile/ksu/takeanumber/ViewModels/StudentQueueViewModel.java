@@ -28,13 +28,11 @@ public class StudentQueueViewModel extends AndroidViewModel {
         mRepository.addStudentToQueue(student, sessionKey);
     }
 
-    public void removeStudent(String sessionName, String studentKey)
-    {
+    public void removeStudent(String sessionName, String studentKey) {
         mRepository.deleteStudent(sessionName, studentKey);
     }
 
-    public void updateStudent(String sessionName, Student student)
-    {
+    public void updateStudent(String sessionName, Student student) {
         mRepository.updateStudent(sessionName, student);
     }
 }

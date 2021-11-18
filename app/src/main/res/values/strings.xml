@@ -7,7 +7,6 @@
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>
     <string name="action_cancel">Cancel</string>
-    <string name="action_okay">Okay</string>
     <string name="action_add_session">Add Session</string>
 
     <string name="text_box_hint_name">Name</string>
@@ -41,7 +40,8 @@
 
     <!-- AddHelpSessionActivity -->
     <string name="action_create_session">Create Session</string>
-    <string name="hint_session_name">Session Name</string>
+    <string name="hint_session_name">Session name</string>
+    <string name="hint_session_creator">Your name</string>
 
     <!-- Settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>

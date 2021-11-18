@@ -59,6 +59,7 @@ public class JoinSessionActivity extends AppCompatActivity {
         displayQueueLocation.setText("");
         getSupportActionBar().setTitle(R.string.title_activity_join_session);
 
+        // Get current help session the student wants to join
         final HelpSession testSession = new HelpSession();
         Intent intent = getIntent();
         String key = intent.getStringExtra("sessionKey");

@@ -25,7 +25,6 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +66,19 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+                Intent intent;
+                HelpSession clickedSession = sessionsList.get(position);
+
+                if (clickedSession.getTaUserKey().equals(mAuth.getCurrentUser().getUid())) {
+                    intent = new Intent(MainActivity.this, TaHelpSessionActivity.class);
+                }
+                else {
+                    intent = new Intent(MainActivity.this, JoinSessionActivity.class);
+                }
+                intent.putExtra("sessionKey", clickedSession.getFirebaseKey());
+                MainActivity.this.startActivity(intent);
+
+                /*
                 String[] colors = {getString(R.string.student), getString(R.string.ta)};
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
@@ -82,13 +94,13 @@ public class MainActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            Intent intent = new Intent(MainActivity.this, HelpSessionActivity.class);
+                            Intent intent = new Intent(MainActivity.this, TaHelpSessionActivity.class);
                             intent.putExtra("sessionKey", sessionsList.get(position).getFirebaseKey());
                             MainActivity.this.startActivity(intent);
                         }
                     }
                 });
-                builder.create().show();
+                builder.create().show();*/
             }
         });
 
