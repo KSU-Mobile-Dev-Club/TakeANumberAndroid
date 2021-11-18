@@ -116,6 +116,7 @@ lint/tmp/
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/deploymentTargetDropDown.xml
+.idea/misc.xml
 
 # AWS User-specific
 .idea/**/aws.xml
