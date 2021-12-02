@@ -1,13 +1,8 @@
 package club.dev.mobile.ksu.takeanumber.UI;
 
-import android.app.AlertDialog;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,15 +10,21 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import club.dev.mobile.ksu.takeanumber.Data.Student;
 import club.dev.mobile.ksu.takeanumber.Data.StudentAdapter;
 import club.dev.mobile.ksu.takeanumber.R;
 import club.dev.mobile.ksu.takeanumber.ViewModels.StudentQueueViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class HelpSessionActivity extends AppCompatActivity {
+public class TaHelpSessionActivity extends AppCompatActivity {
 
     List<Student> studentList = new ArrayList<>();
     StudentQueueViewModel viewModel;
@@ -55,7 +56,7 @@ public class HelpSessionActivity extends AppCompatActivity {
     }
 
     void addListView() {
-        adapter= new StudentAdapter(this);
+        adapter = new StudentAdapter(this);
         ListView listview = findViewById(R.id.help_session_lv);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -63,7 +64,7 @@ public class HelpSessionActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, final View view, int position, long id) {
                 final Student student = studentList.get(position);
                 if(student.getStatus() == 0) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(TaHelpSessionActivity.this);
                     builder.setMessage(getString(R.string.ta_is_helping_question));
                     builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
@@ -74,7 +75,7 @@ public class HelpSessionActivity extends AppCompatActivity {
                     builder.create().show();
                 }
                 else if(student.getStatus() == 1) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(HelpSessionActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(TaHelpSessionActivity.this);
                         builder.setMessage(getString(R.string.ta_done_helping_question));
                         builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {

@@ -19,17 +19,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="club.dev.mobile.ksu.takeanumber.UI.MainActivity" />
         </activity>
-        <activity android:name=".UI.MainActivity">
+        <activity android:name=".UI.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UI.JoinSessionActivity"></activity>
+        <activity android:name=".UI.JoinSessionActivity" />
         <activity
-            android:name=".UI.HelpSessionActivity"
-            android:label="@string/title_activity_help_session"></activity>
+            android:name=".UI.TaHelpSessionActivity"
+            android:label="@string/title_activity_help_session" />
+        <activity android:name=".UI.AddHelpSessionActivity"/>
     </application>
 
 </manifest>

@@ -7,7 +7,7 @@
     <string name="action_yes">Yes</string>
     <string name="action_no">No</string>
     <string name="action_cancel">Cancel</string>
-    <string name="action_okay">Okay</string>
+    <string name="action_add_session">Add Session</string>
 
     <string name="text_box_hint_name">Name</string>
     <string name="text_box_hint_wait_time">How long?</string>
@@ -28,6 +28,7 @@
     <string name="ta_done_helping_question">Are you finished helping them?</string>
 
     <!-- JoinSessionActivity -->
+    <string name="action_take_a_number">Take A Number</string>
     <string name="student_message_ready_for_help">You are ready to be helped!</string>
     <string name="student_message_estimated_wait_time">Estimated wait time: %1$d minutes</string>
     <string name="student_message_queue_location_fourth">You are %1$dth in line</string>
@@ -37,7 +38,16 @@
     <string name="student_message_not_in_line">You are not in line</string>
     <string name="student_message_ready_for_help_question">Are you ready?</string>
 
+    <!-- AddHelpSessionActivity -->
+    <string name="action_create_session">Create Session</string>
+    <string name="hint_session_name">Session name</string>
+    <string name="hint_session_creator">Your name</string>
+
     <!-- Settings for Notifications -->
     <string name="pref_header_notifications">Notifications</string>
     <string name="notification_buzz">Buzz for Notification</string>
+    <string name="pref_header_user_information">User Information</string>
+    <string name="default_user_name">Default User Name</string>
+    <string name="pref_header_developer_settings">Developer Settings</string>
+    <string name="developer_user_id">User ID</string>
 </resources>

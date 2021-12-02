@@ -1,16 +1,12 @@
 package club.dev.mobile.ksu.takeanumber.UI;
 
-import android.app.AlertDialog;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
@@ -22,9 +18,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import java.util.Calendar;
-import android.os.Vibrator;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
+import java.util.Calendar;
 import java.util.List;
 
 import club.dev.mobile.ksu.takeanumber.Data.HelpSession;
@@ -58,6 +59,7 @@ public class JoinSessionActivity extends AppCompatActivity {
         displayQueueLocation.setText("");
         getSupportActionBar().setTitle(R.string.title_activity_join_session);
 
+        // Get current help session the student wants to join
         final HelpSession testSession = new HelpSession();
         Intent intent = getIntent();
         String key = intent.getStringExtra("sessionKey");

@@ -1,9 +1,9 @@
 package club.dev.mobile.ksu.takeanumber.ViewModels;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+import androidx.annotation.NonNull;
 
 import java.util.List;
 
@@ -28,13 +28,11 @@ public class StudentQueueViewModel extends AndroidViewModel {
         mRepository.addStudentToQueue(student, sessionKey);
     }
 
-    public void removeStudent(String sessionName, String studentKey)
-    {
+    public void removeStudent(String sessionName, String studentKey) {
         mRepository.deleteStudent(sessionName, studentKey);
     }
 
-    public void updateStudent(String sessionName, Student student)
-    {
+    public void updateStudent(String sessionName, Student student) {
         mRepository.updateStudent(sessionName, student);
     }
 }

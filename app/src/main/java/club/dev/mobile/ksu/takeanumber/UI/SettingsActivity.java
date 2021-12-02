@@ -1,15 +1,18 @@
 package club.dev.mobile.ksu.takeanumber.UI;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
-import android.support.v7.app.ActionBar;
-import android.preference.PreferenceFragment;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import club.dev.mobile.ksu.takeanumber.R;
 
 /**
- * A {@link PreferenceActivity} that presents a set of application settings. On
+ * A PreferenceActivity that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
  * settings are split by category, with category headers shown to the left of
  * the list of settings.
@@ -28,11 +31,11 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Display the fragment as the main content.
         setContentView(R.layout.activity_settings);
-        getFragmentManager().beginTransaction().replace(R.id.preference_content, new SettingsFragment()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.preference_content, new SettingsFragment()).commit();
     }
 
     /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
+     * Set up the {@link ActionBar}, if the API is available.
      */
     private void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();
@@ -48,11 +51,18 @@ public class SettingsActivity extends AppCompatActivity {
      * clicked on to modify them using a PreferenceFragment.
      */
 
-    public static class SettingsFragment extends PreferenceFragment {
+    public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.preferences);
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.preferences, rootKey);
+
+            SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
+
+            Preference userNamePreference = findPreference("key_user_name");
+            userNamePreference.setSummary(sharedPreferences.getString("key_user_name", ""));
+
+            Preference userIdPreference = findPreference("key_user_id");
+            userIdPreference.setSummary(sharedPreferences.getString("key_user_id", ""));
         }
     }
 }

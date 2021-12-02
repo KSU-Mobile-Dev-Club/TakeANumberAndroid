@@ -11,9 +11,8 @@ public class Student {
     private boolean pressNo;
     private int helpTime;
 
-    Student(){
-
-    }
+    // Required for Firebase - do not remove
+    public Student() {}
 
     public Student (String n, long dt, int t) {
         name = n;
@@ -22,9 +21,11 @@ public class Student {
         helpTime = t;
     }
 
-    public String getName() {return name;}
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String s){
+    public void setName(String s) {
         name = s;
     }
 
@@ -58,7 +59,7 @@ public class Student {
     }
 
     public boolean equals(Student alternate) {
-        if(alternate != null) {
+        if (alternate != null) {
             return firebaseKey.equals(alternate.firebaseKey);
         }
         else {
