@@ -1,38 +1,31 @@
-package club.dev.mobile.ksu.takeanumber.ViewModels;
+package club.dev.mobile.ksu.takeanumber.ViewModels
 
-import android.app.Application;
-import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.annotation.NonNull;
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
+import club.dev.mobile.ksu.takeanumber.Data.Student
+import club.dev.mobile.ksu.takeanumber.Firebase.Repository
+import club.dev.mobile.ksu.takeanumber.Firebase.Repository.Companion.instance
 
-import java.util.List;
-
-import club.dev.mobile.ksu.takeanumber.Data.Student;
-import club.dev.mobile.ksu.takeanumber.Firebase.Repository;
-
-public class StudentQueueViewModel extends AndroidViewModel {
-    private Repository mRepository;
-
-    public StudentQueueViewModel(@NonNull Application application) {
-        super(application);
-        mRepository = Repository.getInstance();
-    }
+class StudentQueueViewModel(application: Application) : AndroidViewModel(application) {
+    private val mRepository: Repository? = instance
 
     //Returns the student wait queue associated with the given Help Session
     //The list that is returned will be sorted in ascending order by DateTime
-    public LiveData<List<Student>> getStudentQueue(String sessionKey) {
-        return mRepository.getStudentQueue(sessionKey);
+    fun getStudentQueue(sessionKey: String): LiveData<List<Student>> {
+        return mRepository!!.getStudentQueue(sessionKey)
     }
 
-    public void addStudentToQueue(Student student, String sessionKey) {
-        mRepository.addStudentToQueue(student, sessionKey);
+    fun addStudentToQueue(student: Student, sessionKey: String) {
+        mRepository!!.addStudentToQueue(student, sessionKey)
     }
 
-    public void removeStudent(String sessionName, String studentKey) {
-        mRepository.deleteStudent(sessionName, studentKey);
+    fun removeStudent(sessionName: String, studentKey: String) {
+        mRepository!!.deleteStudent(sessionName, studentKey)
     }
 
-    public void updateStudent(String sessionName, Student student) {
-        mRepository.updateStudent(sessionName, student);
+    fun updateStudent(sessionName: String, student: Student) {
+        mRepository!!.updateStudent(sessionName, student)
     }
+
 }
