@@ -68,52 +68,51 @@ public class JoinSessionActivity extends AppCompatActivity {
 
         final StudentQueueViewModel mViewModel = ViewModelProviders.of(this).get(StudentQueueViewModel.class);
 
-        final Observer<List<Student>> queueObserver = new Observer<List<Student>>() {
-            @Override
-            public void onChanged(@Nullable List<Student> studentList) {
+        // On change in the student list, rebuild the list. This doesn't handle configuration
+        // changes, only list changes.
+        final Observer<List<Student>> queueObserver = studentList -> {
 
-                final SharedPreferences sharedSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            final SharedPreferences sharedSettings = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
-                int totalTime = 0;
+            int totalTime = 0;
 
-                queueLocation = -1;
-                if(studentList != null) {
-                    for (int i = 0; i < studentList.size(); i++) {
-                        totalTime += studentList.get(i).getTime();
+            queueLocation = -1;
+            if (studentList != null) {
+                for (int i = 0; i < studentList.size(); i++) {
+                    totalTime += studentList.get(i).getTime();
 
-                        if (studentList.get(i).equals(user)) {
-                            if(studentList.get(i).getStatus() == 1){
-                                displayQueueLocation.setText(getString(R.string.student_message_ready_for_help));
+                    if (studentList.get(i).equals(user)) {
+                        if(studentList.get(i).getStatus() == 1){
+                            displayQueueLocation.setText(getString(R.string.student_message_ready_for_help));
 
-                                if (sharedSettings.getBoolean("buzz_for_notification", false)) {
-                                    v.vibrate(1000);
-                                }
-                                ShowDialog(studentList);
+                            if (sharedSettings.getBoolean("buzz_for_notification", false)) {
+                                v.vibrate(1000);
                             }
-                            else{
-                                queueLocation = i + 1;
-                                time.setText(getString(R.string.student_message_estimated_wait_time, totalTime));
-                                if (queueLocation > 3) {
-                                    displayQueueLocation.setText(getString(R.string.student_message_queue_location_fourth, queueLocation));
-                                }
-                                else if (queueLocation > 2) {
-                                    displayQueueLocation.setText(getString(R.string.student_message_queue_location_third, queueLocation));
-                                }
-                                else if (queueLocation > 1) {
-                                    displayQueueLocation.setText(getString(R.string.student_message_queue_location_second, queueLocation));
-                                }
-                                else {
-                                    displayQueueLocation.setText(getString(R.string.student_message_queue_location_first, queueLocation));
-                                }
-                            }
-                            break;
+                            ShowDialog(studentList);
                         }
+                        else{
+                            queueLocation = i + 1;
+                            time.setText(getString(R.string.student_message_estimated_wait_time, totalTime));
+                            if (queueLocation > 3) {
+                                displayQueueLocation.setText(getString(R.string.student_message_queue_location_fourth, queueLocation));
+                            }
+                            else if (queueLocation > 2) {
+                                displayQueueLocation.setText(getString(R.string.student_message_queue_location_third, queueLocation));
+                            }
+                            else if (queueLocation > 1) {
+                                displayQueueLocation.setText(getString(R.string.student_message_queue_location_second, queueLocation));
+                            }
+                            else {
+                                displayQueueLocation.setText(getString(R.string.student_message_queue_location_first, queueLocation));
+                            }
+                        }
+                        break;
                     }
-                    if (queueLocation < 0) {
-                        displayQueueLocation.setText(getString(R.string.student_message_not_in_line));
-                        time.setText(getString(R.string.student_message_estimated_wait_time, totalTime));
-                    }
+                }
+                if (queueLocation < 0) {
+                    displayQueueLocation.setText(getString(R.string.student_message_not_in_line));
+                    time.setText(getString(R.string.student_message_estimated_wait_time, totalTime));
                 }
             }
         };
@@ -121,31 +120,26 @@ public class JoinSessionActivity extends AppCompatActivity {
 
         mViewModel.getStudentQueue(testSession.getFirebaseKey()).observe(this, queueObserver);
 
-        takeNumberButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                String userName = enterNameText.getText().toString();
-                int time = Integer.parseInt(enterTime.getText().toString());
-                takeNumberButton.setEnabled(false);
-                cancelButton.setEnabled(true);
-                enterNameText.setEnabled(false);
-                enterTime.setEnabled(false);
-                user = new Student(userName, Calendar.getInstance().getTimeInMillis(), time);
-                mViewModel.addStudentToQueue(user, testSession.getFirebaseKey());
+        takeNumberButton.setOnClickListener(view -> {
+            String userName = enterNameText.getText().toString();
+            int time1 = Integer.parseInt(enterTime.getText().toString());
+            takeNumberButton.setEnabled(false);
+            cancelButton.setEnabled(true);
+            enterNameText.setEnabled(false);
+            enterTime.setEnabled(false);
 
-
-            }
+            user = new Student(userName, Calendar.getInstance().getTimeInMillis(), time1);
+            mViewModel.addStudentToQueue(user, testSession.getFirebaseKey());
         });
 
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                cancelButton.setEnabled(false);
-                enterNameText.setEnabled(true);
-                takeNumberButton.setEnabled(true);
-                enterTime.setEnabled(true);
-                displayQueueLocation.setText("");
+        cancelButton.setOnClickListener(view -> {
+            cancelButton.setEnabled(false);
+            enterNameText.setEnabled(true);
+            takeNumberButton.setEnabled(true);
+            enterTime.setEnabled(true);
+            displayQueueLocation.setText("");
 
-                mViewModel.removeStudent(testSession.getFirebaseKey(), user.getFirebaseKey());
-            }
+            mViewModel.removeStudent(testSession.getFirebaseKey(), user.getFirebaseKey());
         });
 
         enterNameText.addTextChangedListener(new TextWatcher() {
@@ -223,20 +217,15 @@ public class JoinSessionActivity extends AppCompatActivity {
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(JoinSessionActivity.this);
         builder.setMessage(getString(R.string.student_message_ready_for_help_question));
-        builder.setPositiveButton(getString(R.string.action_yes), new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+        builder.setPositiveButton(getString(R.string.action_yes), (dialog, id) -> {
 
-            }
         });
-        builder.setNegativeButton(getString(R.string.action_no), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (studentList != null) {
-                    Student s = studentList.get(studentList.size() / 2);
-                    user.setDateTime(s.getDateTime() - 1);
-                    user.setStatus(0);
-                    user.setPressNo(true);
-                }
+        builder.setNegativeButton(getString(R.string.action_no), (dialog, which) -> {
+            if (studentList != null) {
+                Student s = studentList.get(studentList.size() / 2);
+                user.setDateTime(s.getDateTime() - 1);
+                user.setStatus(0);
+                user.setPressNo(true);
             }
         });
         builder.create().show();
