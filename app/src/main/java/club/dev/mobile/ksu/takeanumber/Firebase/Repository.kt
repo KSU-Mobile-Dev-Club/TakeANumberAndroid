@@ -39,6 +39,10 @@ class Repository private constructor() {
         )
     }
 
+    fun isStudentInQueue(student: Student, sessionKey: String): Boolean {
+        return getStudentQueue(sessionKey).value?.contains(student) == true
+    }
+
     fun deleteStudent(sessionName: String, studentKey: String) {
         mReference.child("HelpSession").child(sessionName).child("queue").child(studentKey)
             .removeValue()

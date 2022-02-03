@@ -17,7 +17,9 @@ class StudentQueueViewModel(application: Application) : AndroidViewModel(applica
     }
 
     fun addStudentToQueue(student: Student, sessionKey: String) {
-        mRepository!!.addStudentToQueue(student, sessionKey)
+        if (!mRepository!!.isStudentInQueue(student, sessionKey)) {
+            mRepository.addStudentToQueue(student, sessionKey)
+        }
     }
 
     fun removeStudent(sessionName: String, studentKey: String) {
@@ -27,5 +29,4 @@ class StudentQueueViewModel(application: Application) : AndroidViewModel(applica
     fun updateStudent(sessionName: String, student: Student) {
         mRepository!!.updateStudent(sessionName, student)
     }
-
 }

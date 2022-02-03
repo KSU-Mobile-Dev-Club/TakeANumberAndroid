@@ -52,6 +52,8 @@ public class JoinSessionActivity extends AppCompatActivity {
         final LinearLayout layout = new LinearLayout(this);
         final TextView time = findViewById(R.id.time);
 
+        final StudentQueueViewModel mViewModel = ViewModelProviders.of(this).get(StudentQueueViewModel.class);
+
         takeNumberButton.setEnabled(false);
         cancelButton.setEnabled(false);
         enterNameText.setEnabled(true);
@@ -65,8 +67,6 @@ public class JoinSessionActivity extends AppCompatActivity {
         String key = intent.getStringExtra("sessionKey");
 
         testSession.setFirebaseKey(key);
-
-        final StudentQueueViewModel mViewModel = ViewModelProviders.of(this).get(StudentQueueViewModel.class);
 
         // On change in the student list, rebuild the list. This doesn't handle configuration
         // changes, only list changes.
@@ -229,5 +229,10 @@ public class JoinSessionActivity extends AppCompatActivity {
             }
         });
         builder.create().show();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }
