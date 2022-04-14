@@ -36,7 +36,7 @@ class AddHelpSessionActivity : AppCompatActivity() {
 
             // Open the TA View to that help session
             val sessionIntent = Intent(this, TaHelpSessionActivity::class.java)
-            intent.putExtra("sessionKey", helpSession.firebaseKey)
+            sessionIntent.putExtra("sessionKey", helpSession.firebaseKey)
             startActivity(sessionIntent)
         }
     }
